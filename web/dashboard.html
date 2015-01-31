@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
+        
+        <script>
+            $(document).ready(function(){
+                
+            });
+            
+            function addSectionHeader(){
+                //alert("aa")
+                
+                $('#content').append("<div id=\"formArea2\" class=\"panel panel-default\">
+                                        <div class=\"panel-heading\">
+                                            <div class=\"form-group\">
+                                                <div class=\"row\">
+                                                    <div class=\"spacer20\"></div>
+                                                    <div class=\"left10\">
+                                                        <div class=\"col-lg-11\">
+                                                            <input type=\"text\" class=\"form-control\" name=\"headerText\" placeholder=\"Enter header text\">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=\"panel-body\">
+                                            <div class=\"form-group\">
+                                                <div class=\"row\">
+                                                    <div class=\"left10\">
+                                                        <div class=\"col-lg-11\">
+                                                            <input type=\"text\" class=\"form-control\" name=\"headerDescription\" placeholder=\"Enter header description\">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                      ");
+            }            
+            function addText(){
+                
+            }
+            function addGrid(){
+                
+            }
+            function addMultipleChoices(){
+                
+            }
+            function addParagraph(){
+                
+            }
+            function addMedia(){
+                
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        <div class="container">
+            <!--HEADER-->           
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class=""navbar-brand" href="#">QMS</a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user">hanry</span></a></li>
+                            <li>        
+                                
+                                <!--<span class="glyphicon glyphicon-th-large"></span>-->
+                                <div class="spacer5"></div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-th-large"></span></button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sign out</a></li>                                    
+                                      <li role="presentation" class="divider"></li>
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                                    </ul>
+                                  </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!--SEARCH-CREATE_QUESTIONNAIRE-SEND_FORM-->
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-5">
+                    <form class="form-horizontal" role="form" method="POST" action="loginServlet">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search questionnaire">                            
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-1">
+                    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create questionnaire</a>
+                </div>
+                <div class="col-offset-lg-1 col-lg-2">
+                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>                  
+                </div>                 
+                <!--<div style="width:200px; height:200px; background-color:red" id="abc"></div>-->
+            </div>
+            <!--FOLDER HIERARCHY-->
+            <div class="spacer20"></div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Folders</div>
+                        <div class=""panel-body">
+                            <div class="well">
+                                <a id="toggler1" href="#" data-toggle="collapse" class="active" data-target="#demo1">
+                                    <i class="icon-folder-open"></i>
+                                    <i class="icon-folder-close"></i>
+                                    <span class="glyphicon glyphicon-folder-open" badge="2"> Folder 1</span>
+                                    <span class="badge">2</span>
+                                </a>
+                                <div id="demo1" class="collapse in">
+                                    <ul class="nav nav-list">
+                                      <!--<li class="nav-header">List header</li>-->
+                                      <li class="active"><a href="#">Home</a></li>
+                                      <li><a href="#">Library</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="well">
+                                <a id="toggler2" href="#" data-toggle="collapse" class="active" data-target="#demo2">
+                                    <i class="icon-folder-open"></i>
+                                    <i class="icon-folder-close"></i>
+                                    <span class="glyphicon glyphicon-folder-open" badge="2"> Folder 2</span>
+                                    <span class="badge">2</span>
+                                </a>
+                                <div id="demo2" class="collapse in">
+                                    <ul class="nav nav-list">
+                                      <!--<li class="nav-header">List header</li>-->
+                                      <li class="active"><a href="#">Home</a></li>
+                                      <li><a href="#">Library</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="well">
+                                <a id="toggler2" href="#" data-toggle="collapse" class="active" data-target="#demo3">
+                                    <i class="icon-folder-open"></i>
+                                    <i class="icon-folder-close"></i>
+                                    <span class="glyphicon glyphicon-folder-open"> Folder 3</span>
+                                    <span class="badge">2</span>
+                                </a>
+                                <div id="demo3" class="collapse in">
+                                    <ul class="nav nav-list">
+                                      <!--<li class="nav-header">List header</li>-->
+                                      <li class="active"><a href="#">Home</a></li>
+                                      <li><a href="#">Library</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--QUESTIONNAIRE INPUT AREA-->
+                <div class="col-lg-9" id="testForm">                    
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" role="form" method="POST" action="loginServlet" id="formArea">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="left10">
+                                                <div class="col-lg-11">
+                                                    <input type="text" class="form-control" name="campaignTitle" placeholder="Enter campaign title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="left10">
+                                                <div class="col-lg-11">
+                                                    <input type="text" class="form-control" name="questTitle" placeholder="Enter questionnaire title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="left10">
+                                                <div class="col-lg-11">
+                                                    <input type="text" class="form-control" name="Description" placeholder="Enter description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--SECTION HEADER-->
+                                    <!--
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="spacer20"></div>
+                                                    <div class="left10">
+                                                        <div class="col-lg-11">
+                                                            <input type="text" class="form-control" name="headerText" placeholder="Enter header text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="left10">
+                                                        <div class="col-lg-11">
+                                                            <input type="text" class="form-control" name="headerDescription" placeholder="Enter header description">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    -->
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="addItem" data-toggle="dropdown">
+                                                    Add item
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="addItem">
+                                                    <li role="presentation"><a onclick="addSectionHeader();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-text-width">
+                                                                Section header</span></a></li>                                    
+                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-font">
+                                                                  Text</span></a></li> 
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-th">
+                                                                  Grid</span></a></li> 
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-check">
+                                                                  Multiple choices</span></a></li> 
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-align-justify">
+                                                                  Paragraph</span></a></li> 
+                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-picture">
+                                                                  Media</span></a></li> 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="panel-footer clearfix">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

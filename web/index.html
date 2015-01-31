@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
+</head>
+<body>
+    <div class="container">
+        <h2>QMS</h2>        
+        <p>Questionnaire Management System</p>          
+        <div class="row">
+            <div class="col-lg-12">
+                <hr>
+            </div>
+        </div>        
+        <div class="spacer15"></div>
+        <div class="row">
+            <div class="col-lg-6">
+                <center>
+                    <img src ="assets/img/tggs.jpg" class="img-responsive">
+                </center>
+            </div>
+            <div class="col-lg-6">
+                <form class="form-horizontal" role="form" method="POST" action="loginServlet">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-4">
+                            <div class="spacer100"></div>
+                            Sign in
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="spacer100"></div>
+                            or                             
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="spacer50"></div>
+                            <div class="spacer45"></div>
+                                <span id="signinButton">
+                                    <span
+                                      class="g-signin"
+                                      data-callback="signinCallback"
+                                      data-clientid="CLIENT_ID"
+                                      data-cookiepolicy="single_host_origin"
+                                      data-requestvisibleactions="http://schema.org/AddAction"
+                                      data-scope="https://www.googleapis.com/auth/plus.login">
+                                    </span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-sm-8">
+                        <div class="spacer20"></div>
+                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                      </div>        
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-sm-8">
+                            <input type="password" class="form-control" name="pwd" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div class="form-group">        
+                        <div class="col-lg-offset-2 col-lg-4">
+                            <div class="checkbox">
+                              <label><input type="checkbox" iname="remember"> Remember me</label>
+                            </div>
+                        </div>                            
+                        <div class="col-lg-offset-2 col-lg-4">
+                            <button type="submit" class="btn btn-primary">Sign in</button>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-4">
+                            <u><a href="dashboard.html">Forget the password?</a></u>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

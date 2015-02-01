@@ -16,41 +16,79 @@ and open the template in the editor.
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
         
         <script>
+            var counterSect = 0;
+            var counterText = 0;
+            var counterGrid = 0;
+            var counterMul = 0;
+            var counterPara = 0;
+            var counter Media = 0;
+            
+            
             $(document).ready(function(){
                 
             });
-            
-            function addSectionHeader(){
-                //alert("aa")
-                
-                $('#content').append("<div id=\"formArea2\" class=\"panel panel-default\">
-                                        <div class=\"panel-heading\">
-                                            <div class=\"form-group\">
-                                                <div class=\"row\">
-                                                    <div class=\"spacer20\"></div>
-                                                    <div class=\"left10\">
-                                                        <div class=\"col-lg-11\">
-                                                            <input type=\"text\" class=\"form-control\" name=\"headerText\" placeholder=\"Enter header text\">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=\"panel-body\">
-                                            <div class=\"form-group\">
-                                                <div class=\"row\">
-                                                    <div class=\"left10\">
-                                                        <div class=\"col-lg-11\">
-                                                            <input type=\"text\" class=\"form-control\" name=\"headerDescription\" placeholder=\"Enter header description\">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+              
+            function addSectionHeader(){  
+                $('#area').append("<div id=\"formArea2\" class=\"panel panel-default\">\
+                                        <div class=\"panel-heading\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" name=\"headerText\" onblur=\"hideSectionHeader()\" placeholder=\"Enter header text\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"headerDescription\" onblur=\"hideSectionHeader() placeholder=\"Enter header description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                     </div>                      ");
-            }            
+                document.getElementById("headerText").focus();
+            }     
+            
+            function hideSectionHeader(){
+                //if($('#formArea2').){
+                    $('#formArea2').slideToggle();
+                //}
+            }
+            
             function addText(){
-                
+                $('#area').append("<div id=\"formArea2\" class=\"panel panel-default\">\
+                                        <div class=\"panel-heading\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" name=\"question\" placeholder=\"Enter question\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" name=\"textDescription\" placeholder=\"Enter description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                    </div>                      ");
             }
             function addGrid(){
                 
@@ -59,7 +97,31 @@ and open the template in the editor.
                 
             }
             function addParagraph(){
-                
+                 $('#area').append("<div id=\"formArea2\" class=\"panel panel-default\">\
+                                        <div class=\"panel-heading\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" name=\"questionParagraph\" placeholder=\"Enter question\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" name=\"questionDescription\" placeholder=\"Enter description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                    </div>                      ");
             }
             function addMedia(){
                 
@@ -232,6 +294,7 @@ and open the template in the editor.
                                         </div>
                                     </div>                                    
                                     -->
+                                    <div id="area"></div>
                                     <div class="row">
                                         <div class="col-lg-2">
                                             <div class="dropdown">
@@ -239,18 +302,18 @@ and open the template in the editor.
                                                     Add item
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="addItem">
-                                                    <li role="presentation"><a onclick="addSectionHeader();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-text-width">
-                                                                Section header</span></a></li>                                    
+                                                    <li role="presentation"><a onclick="addSectionHeader();" role="menuitem" tabindex="-1" href="#">
+                                                            <span class="glyphicon glyphicon-text-width">Section header</span></a></li>                                    
                                                     <li role="presentation" class="divider"></li>
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-font">
+                                                    <li role="presentation"><a onclick="hideSectionHeader();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-font">
                                                                   Text</span></a></li> 
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-th">
+                                                    <li role="presentation"><a onclick="addGrid();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-th">
                                                                   Grid</span></a></li> 
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-check">
+                                                    <li role="presentation"><a onclick="addMultipleChoices();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-check">
                                                                   Multiple choices</span></a></li> 
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-align-justify">
+                                                    <li role="presentation"><a onclick="addParagraph();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-align-justify">
                                                                   Paragraph</span></a></li> 
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-picture">
+                                                    <li role="presentation"><a onclick="addMedia(); "role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-picture">
                                                                   Media</span></a></li> 
                                                 </ul>
                                             </div>

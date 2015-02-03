@@ -16,116 +16,199 @@ and open the template in the editor.
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
         
         <script>
-            var counterSect = 0;
+            var checkerSect=0;
+            var counterSect= -1;
+           
             var counterText = 0;
             var counterGrid = 0;
-            var counterMul = 0;
+            var counterMult = 0;
             var counterPara = 0;
-            var counterMedia = 0;
+            var counterMedia = 0;             
             
-            
-            $(document).ready(function(){
+            $(document).ready(function(){                
                
             });
-              
+    
             function addSectionHeader(){  
-                counterSect++;
-                $('#area').append("<div id=\"sectionHeader\"+counterSect class=\"panel panel-default\">\
-                                        <div class=\"panel-heading\">\
+                counterSect=counterSect+1;                
+                $('#area').append("<div id=\"sectionHeader"+ counterSect +"\" class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"headerText\" placeholder=\"Enter header text\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"headerText"+counterSect+"\" placeholder=\"Enter header text\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
                                             </div>\
-                                        </div>\
-                                        <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"headerDescription\" placeholder=\"Enter header description\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"headerDesc"+counterSect+"\" placeholder=\"Enter header description\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
                                             </div>\
                                         </div>\
-                                    </div>                      ");
-                document.getElementById('#headerText').focus();
-            }     
+                                    </div> \
+                     ");
+                $('#headerText'+counterSect).focus();   
+                
+                                                
+                $('#sectionHeader'+counterSect).focusin(function(){
+                    $('#sectionHeader'+counterSect).css("background-color", "YELLOW");                    
+                }); 
+                
+                $('#sectionHeader'+counterSect).focusout(function(){
+                    $('#sectionHeader'+counterSect).css("background-color", "RED");
+                    //$('#sectionHeader'+counterSect).toggle();
+                }); 
+            } 
             
             function hideSectionHeader(){
-                //if($('#formArea2').){
-                    $('#sectionHeader'+counterSect).slideToggle();
-                //}
+                $('#sectionHeader'+counterSect).slideToggle();
+                
             }
             
             function addText(){
-                $('#sectionHeader'+counterSect).slideToggle();
-                /*
-                $('#area').append("<div id=\"formArea2\" class=\"panel panel-default\">\
-                                        <div class=\"panel-heading\">\
+                counterText=counterText+1; 
+                $('#area').append("<div id=\"text"+ counterText +"\" class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" name=\"question\" placeholder=\"Enter question\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"questionText"+counterText+"\" placeholder=\"Enter question\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
                                             </div>\
-                                        </div>\
-                                        <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" name=\"textDescription\" placeholder=\"Enter description\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"textDesc"+counterText+"\" placeholder=\"Enter question description\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
                                             </div>\
                                         </div>\
-                                    </div>                      ");*/
+                                    </div> \
+                     ");
+        
+                     $('#questionText'+counterText).focus();   
+                
+                                                
+                $('#text'+counterText).focusin(function(){
+                    $('#text'+counterText).css("background-color", "BLUE");                    
+                }); 
+                
+                $('#text'+counterText).focusout(function(){
+                    $('#text'+counterText).css("background-color", "RED");
+                    //$('#sectionHeader'+counterSect).toggle();
+                }); 
             }
             function addGrid(){
                 
             }
+            /*
             function addMultipleChoices(){
-                
-            }
-            function addParagraph(){
-                 $('#area').append("<div id=\"formArea2\" class=\"panel panel-default\">\
-                                        <div class=\"panel-heading\">\
+                $('#area').append("<div class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" name=\"questionParagraph\" placeholder=\"Enter question\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"multiQuestion\" placeholder=\"Enter question\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
-                                            </div>\
-                                        </div>\
-                                        <div class=\"panel-body\">\
+                                            </div>\                                  
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" name=\"questionDescription\" placeholder=\"Enter description\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Enter description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\                                                          
+                                                            <div class=\"checkbox\">\
+                                                                <label>
+                                                                    <input type=\"checkbox\" value=\"\">\
+                                                                    <input type=\text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 1\">\
+                                                                </label>\
+                                                            </div>\
+                                                            <div class=\"checkbox\">\
+                                                                <label>\
+                                                                    <input type=\"checkbox\" value=\"\">\
+                                                                    <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 2\">\
+                                                                </label>\
+                                                            </div>\
+                                                            <div class=\"checkbox disabled\">\
+                                                                <label>\
+                                                                    <input type=\"checkbox\" value=\"\">\
+                                                                    <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 3\">\
+                                                                </label>\
+                                                            </div>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\                                           
+                                        <div>\
+                                    </div>\
+                            ");
+            }*/
+            
+            function addParagraph(){
+                counterPara=counterPara+1;
+                $('#area').append("<div id=\"paragraph"+ counterPara +"\" class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"questionPara"+counterText+"\" placeholder=\"Enter question\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <input type=\"text\" class=\"form-control\" id=\"paraDesc"+counterText+"\" placeholder=\"Enter question description\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
                                             </div>\
                                         </div>\
-                                    </div>                      ");
+                                    </div> \
+                     ");
+        
+                     $('#questioPara'+counterPara).focus();   
+                
+                                                
+                $('#paragraph'+counterPara).focusin(function(){
+                    $('#paragraph'+counterPara).css("background-color", "GREEN");                    
+                }); 
+                
+                $('#paragraph'+counterPara).focusout(function(){
+                    $('#paragraph'+counterPara).css("background-color", "RED");
+                    //$('#sectionHeader'+counterSect).toggle();
+                });                 
             }
+            
             function addMedia(){
                 
             }
@@ -246,6 +329,7 @@ and open the template in the editor.
                                         <div class="row">
                                             <div class="left10">
                                                 <div class="col-lg-11">
+                                                    Campaign title
                                                     <input type="text" class="form-control" name="campaignTitle" placeholder="Enter campaign title">
                                                 </div>
                                             </div>
@@ -255,6 +339,7 @@ and open the template in the editor.
                                         <div class="row">
                                             <div class="left10">
                                                 <div class="col-lg-11">
+                                                    Questionnaire title
                                                     <input type="text" class="form-control" name="questTitle" placeholder="Enter questionnaire title">
                                                 </div>
                                             </div>
@@ -264,6 +349,7 @@ and open the template in the editor.
                                         <div class="row">
                                             <div class="left10">
                                                 <div class="col-lg-11">
+                                                    Questionnaire description
                                                     <input type="text" class="form-control" name="Description" placeholder="Enter description">
                                                 </div>
                                             </div>
@@ -272,28 +358,54 @@ and open the template in the editor.
                                     <!--SECTION HEADER-->
                                     <!--
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-body">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="spacer20"></div>
                                                     <div class="left10">
                                                         <div class="col-lg-11">
-                                                            <input type="text" class="form-control" name="headerText" placeholder="Enter header text">
+                                                            Multiple Question
+                                                            <input type="text" class="form-control" id="multiQuestion" placeholder="Enter question">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
+                                            </div>                                       
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="left10">
                                                         <div class="col-lg-11">
-                                                            <input type="text" class="form-control" name="headerDescription" placeholder="Enter header description">
+                                                            Description
+                                                            <input type="text" class="form-control" id="multiDescription" placeholder="Enter description">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="left10">
+                                                        <div class="col-lg-11">                                                            
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" value="">
+                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 1">
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" value="">
+                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 2">
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox disabled">
+                                                                <label>
+                                                                    <input type="checkbox" value="">
+                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 3">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                     </div>                                    
                                     -->
@@ -308,7 +420,7 @@ and open the template in the editor.
                                                     <li role="presentation"><a onclick="addSectionHeader();" role="menuitem" tabindex="-1" href="#">
                                                             <span class="glyphicon glyphicon-text-width">Section header</span></a></li>                                    
                                                     <li role="presentation" class="divider"></li>
-                                                    <li role="presentation"><a onclick="hideSectionHeader();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-font">
+                                                    <li role="presentation"><a onclick="addText();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-font">
                                                                   Text</span></a></li> 
                                                     <li role="presentation"><a onclick="addGrid();" role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-th">
                                                                   Grid</span></a></li> 

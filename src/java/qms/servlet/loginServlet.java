@@ -5,8 +5,19 @@
  */
 package qms.servlet;
 
+import qms.database.connection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +38,10 @@ public class loginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,25 +53,35 @@ public class loginServlet extends HttpServlet {
             String path = "dashboard.html";
             
             // build HTML code
+            /*
             String htmlRespone = "<html>";
             htmlRespone += "<h2>Your username is: " + email + "<br/>";      
             htmlRespone += "Your password is: " + password + "</h2>";    
             htmlRespone += "</html>";
+            */
 
             // return response
-            out.println(htmlRespone);
+            //out.println(htmlRespone);
             
-            // Validate
-            if(email.equals("hanry@a") && password.equals("12345")){
-                //response.sendRedirect(response.encodeRedirectURL(path));
-                response.sendRedirect(path+"?a=b");
-            }else{
-                response.sendRedirect("index.html");
+            //DB connection           
+            connection con = new connection();
+            con.connect();
+            
+        String query = "SELECT * FROM user WHERE userName = '"+email+"' AND password = '"+password+"'";
+        try {
+            ResultSet rs = con.execQuery(query);
+            
+            if(rs.next()){
+                //out.print(rs.getString(1));
+                response.sendRedirect(path);
             }
-            
-            
-            
-            
+            else{
+                out.print("wrong");
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(scanData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
         }
     }
 

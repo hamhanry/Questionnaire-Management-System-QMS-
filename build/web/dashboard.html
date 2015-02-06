@@ -16,14 +16,18 @@ and open the template in the editor.
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
         
         <script>
+            var i=0;
+            var temp;
             var checkerSect=0;
-            var counterSect= -1;
-           
+            var counterSect= -1;           
             var counterText = 0;
             var counterGrid = 0;
-            var counterMult = 0;
+            var counterRow = 0;
+            var counterCol = 0;
+            var counterMulti = 0;
             var counterPara = 0;
-            var counterMedia = 0;             
+            var counterMedia = 0; 
+            var counterRadio = 1;
             
             $(document).ready(function(){                
                
@@ -38,6 +42,7 @@ and open the template in the editor.
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
+                                                            Header name\
                                                             <input type=\"text\" class=\"form-control\" id=\"headerText"+counterSect+"\" placeholder=\"Enter header text\">\
                                                         </div>\
                                                     </div>\
@@ -47,6 +52,7 @@ and open the template in the editor.
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
+                                                            Header description\
                                                             <input type=\"text\" class=\"form-control\" id=\"headerDesc"+counterSect+"\" placeholder=\"Enter header description\">\
                                                         </div>\
                                                     </div>\
@@ -59,11 +65,14 @@ and open the template in the editor.
                 
                                                 
                 $('#sectionHeader'+counterSect).focusin(function(){
-                    $('#sectionHeader'+counterSect).css("background-color", "YELLOW");                    
+                    //$('#sectionHeader'+counterSect).css("box-shadow", "0 1px 1px rgba(0,0,0,.05)");
+                    $('#sectionHeader'+counterSect).css("border-color","RED");
+                    //$('#sectionHeader'+counterSect).css({border-style:groove});
                 }); 
                 
                 $('#sectionHeader'+counterSect).focusout(function(){
-                    $('#sectionHeader'+counterSect).css("background-color", "RED");
+                    $('#sectionHeader'+counterSect).css("border-color","#ddd");
+                    //$('#sectionHeader'+counterSect).css("background-color", "RED");
                     //$('#sectionHeader'+counterSect).toggle();
                 }); 
             } 
@@ -82,6 +91,7 @@ and open the template in the editor.
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
+                                                            Question\
                                                             <input type=\"text\" class=\"form-control\" id=\"questionText"+counterText+"\" placeholder=\"Enter question\">\
                                                         </div>\
                                                     </div>\
@@ -91,6 +101,7 @@ and open the template in the editor.
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
+                                                            Question description\
                                                             <input type=\"text\" class=\"form-control\" id=\"textDesc"+counterText+"\" placeholder=\"Enter question description\">\
                                                         </div>\
                                                     </div>\
@@ -104,36 +115,33 @@ and open the template in the editor.
                 
                                                 
                 $('#text'+counterText).focusin(function(){
-                    $('#text'+counterText).css("background-color", "BLUE");                    
+                    //$('#text'+counterText).css("background-color", "BLUE");
+                    $('#text'+counterText).css("border-color","RED");
                 }); 
                 
                 $('#text'+counterText).focusout(function(){
-                    $('#text'+counterText).css("background-color", "RED");
+                    $('#text'+counterText).css("border-color","#ddd");
+                    //$('#text'+counterText).css("background-color", "RED");
                     //$('#sectionHeader'+counterSect).toggle();
                 }); 
             }
+            
             function addGrid(){
+                counterGrid=counterGrid+1;
+                counterRow=counterRow+1;
+                counterCol=counterCol+1;
+                /*html = "question"+counterRow;
+                $('#result').html(html);*/
                 
-            }
-            /*
-            function addMultipleChoices(){
-                $('#area').append("<div class=\"panel panel-default\">\
+                $('#area').append("<div id=\"grid"+ counterGrid +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"multiQuestion\" placeholder=\"Enter question\">\
-                                                        </div>\
-                                                    </div>\
-                                                </div>\
-                                            </div>\                                  
-                                            <div class=\"form-group\">\
-                                                <div class=\"row\">\
-                                                    <div class=\"left10\">\
-                                                        <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Enter description\">\
+                                                            Question\
+                                                            <input type=\"text\" class=\"form-control\" id=\"questionGrid"+counterGrid+"\" placeholder=\"Enter question\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
@@ -141,33 +149,192 @@ and open the template in the editor.
                                             <div class=\"form-group\">\
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
-                                                        <div class=\"col-lg-11\">\                                                          
-                                                            <div class=\"checkbox\">\
-                                                                <label>
-                                                                    <input type=\"checkbox\" value=\"\">\
-                                                                    <input type=\text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 1\">\
-                                                                </label>\
-                                                            </div>\
-                                                            <div class=\"checkbox\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Description\
+                                                            <input type=\"text\" class=\"form-control\" id=\"gridDesc"+counterGrid+"\" placeholder=\"Enter question description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Row 1\
+                                                            <div id=\"left15\"></div>\
+                                                            <label>\
+                                                                <input type=\"text\" class=\"form-control\" id=\"gridRow"+counterRow+"\" onfocus=\"unlockRow(id)\" placeholder=\"Option "+counterRow+"\">\
+                                                            </label>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div id= \"multiRow\"></div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Col 1\
+                                                            <div id=\"left15\"></div>\
+                                                            <label>\
+                                                                <input type=\"text\" class=\"form-control\" id=\"gridCol"+counterCol+"\" onfocus=\"unlockCol(id)\" placeholder=\"Option "+counterCol+"\">\
+                                                            </label>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div id= \"multiCol\"></div>\
+                                        </div>\
+                                    </div>\
+                     ");     
+                temp = counterRadio;
+                
+                $('#grid'+counterGrid).focus();   
+                
+                                                
+                $('#grid'+counterGrid).focusin(function(){
+                    $('#grid'+counterGrid).css("border-color", "RED");                    
+                }); 
+                
+                $('#grid'+counterGrid).focusout(function(){
+                    $('#grid'+counterGrid).css("border-color", "#ddd");
+                    //$('#sectionHeader'+counterSect).toggle();
+                }); 
+            }
+            
+            function unlockRow(id){                  
+                //alert(id);
+                //alert("multiChoice"+counterRadio);
+                if(id=="gridRow"+counterRow){
+                    //alert("true");
+                    counterRow=counterRow+1;
+                    $('#multiRow').append(" <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <div id=\"resultRow"+counterRow+"\"></div>\
+                                                            <div id=\"left15\"></div>\
+                                                            <label>\
+                                                                <input type=\"text\" class=\"form-control\" id=\"gridRow"+counterRow+"\" onfocus=\"unlockRow(id)\" placeholder=\"Option "+counterRow+"\">\
+                                                            </label>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                                ");
+               }
+               
+               html = "Row "+counterRow;
+               $('#resultRow'+counterRow).html(html);
+               
+            }
+            
+            function unlockCol(id){                  
+                //alert(id);
+                //alert("multiChoice"+counterRadio);
+                if(id=="gridCol"+counterCol){
+                    //alert("true");
+                    counterCol=counterCol+1;
+                    $('#multiCol').append("<div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            <div id=\"resultCol"+counterCol+"\"></div>\
+                                                            <div id=\"left15\"></div>\
+                                                            <label>\
+                                                                <input type=\"text\" class=\"form-control\" id=\"gridCol"+counterCol+"\" onfocus=\"unlockCol(id)\" placeholder=\"Option "+counterCol+"\">\
+                                                            </label>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                                ");
+               }       
+               
+               html = "Col "+counterCol;
+               $('#resultCol'+counterCol).html(html);
+            }
+            
+            function addMultipleChoices(){                
+                counterMulti=counterMulti+1;
+                //counterRadio=counterRadio+1;
+                $('#area').append("<div id=\"multiple"+ counterMulti +"\" class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Question\
+                                                            <input type=\"text\" class=\"form-control\" id=\"questionMulti"+counterMulti+"\" placeholder=\"Enter question\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Description\
+                                                            <input type=\"text\" class=\"form-control\" id=\"multiDesc"+counterMulti+"\" placeholder=\"Enter question description\">\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                             <div class=\"checkbox\">\
                                                                 <label>\
-                                                                    <input type=\"checkbox\" value=\"\">\
-                                                                    <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 2\">\
-                                                                </label>\
-                                                            </div>\
-                                                            <div class=\"checkbox disabled\">\
-                                                                <label>\
-                                                                    <input type=\"checkbox\" value=\"\">\
-                                                                    <input type=\"text\" class=\"form-control\" id=\"multiDescription\" placeholder=\"Option 3\">\
+                                                                    <input type=\"text\" class=\"form-control\" id=\"multiChoice"+counterRadio+"\" onfocus=\"unlockMultiple(id)\" placeholder=\"Option "+counterRadio+"\">\
                                                                 </label>\
                                                             </div>\
                                                         </div>\
                                                     </div>\
                                                 </div>\
-                                            </div>\                                           
-                                        <div>\
+                                            </div>\
+                                            <div id= \"multiArea\"></div>\
+                                        </div>\
                                     </div>\
-                            ");
-            }*/
+                     ");     
+                temp = counterRadio;
+                
+                $('#questionMulti'+counterMulti).focus();   
+                
+                                                
+                $('#multiple'+counterMulti).focusin(function(){
+                    $('#multiple'+counterMulti).css("border-color", "RED");                    
+                }); 
+                
+                $('#multiple'+counterMulti).focusout(function(){
+                    $('#multiple'+counterMulti).css("border-color", "#ddd");
+                    //$('#sectionHeader'+counterSect).toggle();
+                }); 
+            }
+            
+            function unlockMultiple(id){                  
+                //alert(id);
+                //alert("multiChoice"+counterRadio);
+                if(id=="multiChoice"+counterRadio){
+                    //alert("true");
+                    counterRadio=counterRadio+1;
+                    $('#multiArea').append("<div class=\"form-group\">\
+                                                    <div class=\"row\">\
+                                                        <div class=\"left10\">\
+                                                            <div class=\"col-lg-11\">\
+                                                                 <div class=\"checkbox\">\
+                                                                    <label>\
+                                                                        <input type=\"text\" class=\"form-control\" id=\"multiChoice"+counterRadio+"\" onfocus=\"unlockMultiple(id)\" placeholder=\"Option "+counterRadio+"\">\
+                                                                    </label>\
+                                                                </div>\
+                                                            </div>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                                ");
+               }               
+            }
             
             function addParagraph(){
                 counterPara=counterPara+1;
@@ -178,7 +345,8 @@ and open the template in the editor.
                                                     <div class=\"spacer20\"></div>\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"questionPara"+counterText+"\" placeholder=\"Enter question\">\
+                                                            Question\
+                                                            <input type=\"text\" class=\"form-control\" id=\"questionPara"+counterPara+"\" placeholder=\"Enter question\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
@@ -187,7 +355,8 @@ and open the template in the editor.
                                                 <div class=\"row\">\
                                                     <div class=\"left10\">\
                                                         <div class=\"col-lg-11\">\
-                                                            <input type=\"text\" class=\"form-control\" id=\"paraDesc"+counterText+"\" placeholder=\"Enter question description\">\
+                                                            Description\
+                                                            <input type=\"text\" class=\"form-control\" id=\"paraDesc"+counterPara+"\" placeholder=\"Enter question description\">\
                                                         </div>\
                                                     </div>\
                                                 </div>\
@@ -200,11 +369,11 @@ and open the template in the editor.
                 
                                                 
                 $('#paragraph'+counterPara).focusin(function(){
-                    $('#paragraph'+counterPara).css("background-color", "GREEN");                    
+                    $('#paragraph'+counterPara).css("border-color", "RED");                    
                 }); 
                 
                 $('#paragraph'+counterPara).focusout(function(){
-                    $('#paragraph'+counterPara).css("background-color", "RED");
+                    $('#paragraph'+counterPara).css("border-color", "#ddd");
                     //$('#sectionHeader'+counterSect).toggle();
                 });                 
             }
@@ -325,32 +494,35 @@ and open the template in the editor.
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form" method="POST" action="loginServlet" id="formArea">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="left10">
-                                                <div class="col-lg-11">
-                                                    Campaign title
-                                                    <input type="text" class="form-control" name="campaignTitle" placeholder="Enter campaign title">
+                                    <div class="panel panel-default">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="spacer25"></div>
+                                                <div class="left25">
+                                                    <div class="col-lg-11">
+                                                        Campaign title
+                                                        <input type="text" class="form-control" name="campaignTitle" placeholder="Enter campaign title">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="left10">
-                                                <div class="col-lg-11">
-                                                    Questionnaire title
-                                                    <input type="text" class="form-control" name="questTitle" placeholder="Enter questionnaire title">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="left25">
+                                                    <div class="col-lg-11">
+                                                        Questionnaire title
+                                                        <input type="text" class="form-control" name="questTitle" placeholder="Enter questionnaire title">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="left10">
-                                                <div class="col-lg-11">
-                                                    Questionnaire description
-                                                    <input type="text" class="form-control" name="Description" placeholder="Enter description">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="left25">
+                                                    <div class="col-lg-11">
+                                                        Questionnaire description
+                                                        <input type="text" class="form-control" name="Description" placeholder="Enter description">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -439,6 +611,7 @@ and open the template in the editor.
                             <div class="panel-footer clearfix">
                                 <div class="pull-left">
                                     <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>
+                                    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> Save form</a>
                                 </div>
                             </div>
                         </div>

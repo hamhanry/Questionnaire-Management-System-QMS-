@@ -11,6 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/datepicker3.css">
+        <link rel="stylesheet" type="text/text" href="assets/js/bootstrap-datetimepicker.js">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
@@ -28,10 +30,18 @@ and open the template in the editor.
             var counterPara = 0;
             var counterMedia = 0; 
             var counterRadio = 1;
+            var pict;
+            var video;
+            var campaignName;
             
-            $(document).ready(function(){                
+            $(document).ready(function(){
+                /*$('#videoArea').html(function(i, html) {
+                    return html.replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="200" height="100" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>').replace(/(?:http:\/\/)?(?:www\.)?(?:vimeo\.com)\/(.+)/g, '<iframe src="//player.vimeo.com/video/$1" width="200" height="100" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+                });*/ 
+                $('#sandbox-container .input-group.date').datepicker({
+                });
                
-            });
+            });           
     
             function addSectionHeader(){  
                 counterSect=counterSect+1;                
@@ -379,15 +389,53 @@ and open the template in the editor.
             }
             
             function addMedia(){
+                /*$('#area').append("<div class=\"fileinput fileinput-new\" data-provides=\"fileinput\">\
+                                        <div class=\"fileinput-preview thumbnail\" data-trigger=\"fileinput\" style=\"width: 200px; height: 150px;\"></div>\
+                                        <div>\
+                                            <span class=\"btn btn-default btn-file\"><span class=\"fileinput-new\">Select image</span><span class=\"fileinput-exists\">Change</span><input type=\"file\" name=\"...\"></span>\
+                                            <a href=\"#\" class=\"btn btn-default fileinput-exists\" data-dismiss=\"fileinput\">Remove</a>\
+                                        </div>\
+                                    </div>");*/
+                $('#area').append("");     
+            }
+            
+            function embedVideo(){
+            
+            }
+            
+            function search(){
+            
+            }
+            
+            function createQuestionnaire(){
+            
+            }
+            
+            function sendForm(){
                 
             }
+            
+            function saveForm(){
+                $.get("updateDBServlet",
+                "campaignInput="+$('#campaignName').val()+
+                "&questionnaireInput="+$('#questionTitle').val()+
+                "&questionnaireDescInput="+$('#questionDescription').val()+"",function(data){
+			alert(data);
+                });                
+            }
+            
+            function showDatePicker(){
+                 $('#startDate').datetimepicker(); 
+                 //$('#endDate').datetimepicker(); 
+            }
+            
             
         </script>
         
     </head>
     <body>
         <div class="container">
-            <!--HEADER-->           
+            <!--HEADER-->                   
             <div class="row">
                 <nav class="navbar navbar-default">
                     <div class="container">
@@ -493,7 +541,7 @@ and open the template in the editor.
                 <div class="col-lg-9" id="testForm">                    
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-horizontal" role="form" method="POST" action="loginServlet" id="formArea">
+                                <form class="form-horizontal" role="form" method="POST" action="updateDBServlet">
                                     <div class="panel panel-default">
                                         <div class="form-group">
                                             <div class="row">
@@ -501,7 +549,7 @@ and open the template in the editor.
                                                 <div class="left25">
                                                     <div class="col-lg-11">
                                                         Campaign title
-                                                        <input type="text" class="form-control" name="campaignTitle" placeholder="Enter campaign title">
+                                                        <input type="text" class="form-control" id="campaignName" placeholder="Enter campaign name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -511,7 +559,7 @@ and open the template in the editor.
                                                 <div class="left25">
                                                     <div class="col-lg-11">
                                                         Questionnaire title
-                                                        <input type="text" class="form-control" name="questTitle" placeholder="Enter questionnaire title">
+                                                        <input type="text" class="form-control" id="questionTitle" placeholder="Enter questionnaire title">
                                                     </div>
                                                 </div>
                                             </div>
@@ -519,14 +567,47 @@ and open the template in the editor.
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="left25">
-                                                    <div class="col-lg-11">
+                                                    <div class="col-lg-5">
                                                         Questionnaire description
-                                                        <input type="text" class="form-control" name="Description" placeholder="Enter description">
+                                                        <input type="text" class="form-control" id="questionDescription" placeholder="Enter description">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="left25">
+                                                    <div class="col-lg-5">
+                                                        Start date
+                                                        <div class="well">
+                                                            <div id="startDate" class="input-append">
+                                                              <input data-format="yyyy-MM-dd" type="text"></input>
+                                                              <span class="add-on">
+                                                                <i data-time-icon="icon-time" data-date-icon="icon-calendar" onclick='showDatePicker()'>
+                                                                </i>
+                                                              </span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                      </div>
+                                                    <div class="col-lg-5">
+                                                        End date
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control" id="a"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                        </div>
+                                                        
+                                                        <script>
+                                                            $('#a').datepicker({
+                                                            });
+                                                        </script>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>   
                                     </div>
+                                    
+                                        
                                     <!--SECTION HEADER-->
                                     <!--
                                     <div class="panel panel-default">
@@ -536,8 +617,8 @@ and open the template in the editor.
                                                     <div class="spacer20"></div>
                                                     <div class="left10">
                                                         <div class="col-lg-11">
-                                                            Multiple Question
-                                                            <input type="text" class="form-control" id="multiQuestion" placeholder="Enter question">
+                                                            Picture
+                                                            <input type="file" id="pict">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -546,38 +627,22 @@ and open the template in the editor.
                                                 <div class="row">
                                                     <div class="left10">
                                                         <div class="col-lg-11">
-                                                            Description
-                                                            <input type="text" class="form-control" id="multiDescription" placeholder="Enter description">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="left10">
-                                                        <div class="col-lg-11">                                                            
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" value="">
-                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 1">
-                                                                </label>
-                                                            </div>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" value="">
-                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 2">
-                                                                </label>
-                                                            </div>
-                                                            <div class="checkbox disabled">
-                                                                <label>
-                                                                    <input type="checkbox" value="">
-                                                                    <input type="text" class="form-control" id="multiDescription" placeholder="Option 3">
-                                                                </label>
+                                                            Video 
+                                                            <div id="videoArea">
+                                                                    http://www.youtube.com/watch?v=t-ZRX8984sc
+                                                                    <br />
+                                                                    http://vimeo.com/82495711
+                                                                    <br />
+                                                                    http://youtu.be/t-ZRX8984sc
+                                                                </div>
+                                                            <div id="divContent">
+                                                                <input type="text" class="form-control" name="video" placeholder="Enter video link">
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>                                            
+                                            </div>                                                                                       
                                         </div>
                                     </div>                                    
                                     -->
@@ -610,8 +675,8 @@ and open the template in the editor.
                             </div>
                             <div class="panel-footer clearfix">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>
-                                    <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> Save form</a>
+                                    <a href="#" onclick="sendForm()" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>
+                                    <a href="#" onclick="saveForm()" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> Save form</a>
                                 </div>
                             </div>
                         </div>

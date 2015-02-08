@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
         <link rel="stylesheet" type="text/css" href="assets/css/datepicker3.css">
-        <link rel="stylesheet" type="text/text" href="assets/js/bootstrap-datetimepicker.js">
+        <script src="assets/js/bootstrap-datetimepicker.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
@@ -21,7 +21,7 @@ and open the template in the editor.
             var i=0;
             var temp;
             var checkerSect=0;
-            var counterSect= -1;           
+            var counterSect= 0;           
             var counterText = 0;
             var counterGrid = 0;
             var counterRow = 0;
@@ -30,16 +30,13 @@ and open the template in the editor.
             var counterPara = 0;
             var counterMedia = 0; 
             var counterRadio = 1;
+            var counterQuestion = 0;
             var pict;
             var video;
             var campaignName;
             
             $(document).ready(function(){
-                /*$('#videoArea').html(function(i, html) {
-                    return html.replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="200" height="100" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>').replace(/(?:http:\/\/)?(?:www\.)?(?:vimeo\.com)\/(.+)/g, '<iframe src="//player.vimeo.com/video/$1" width="200" height="100" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
-                });*/ 
-                $('#sandbox-container .input-group.date').datepicker({
-                });
+                
                
             });           
     
@@ -93,6 +90,7 @@ and open the template in the editor.
             }
             
             function addText(){
+                counterQuestion=counterQuestion+1;
                 counterText=counterText+1; 
                 $('#area').append("<div id=\"text"+ counterText +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
@@ -137,6 +135,7 @@ and open the template in the editor.
             }
             
             function addGrid(){
+                counterQuestion=counterQuestion+1;
                 counterGrid=counterGrid+1;
                 counterRow=counterRow+1;
                 counterCol=counterCol+1;
@@ -265,7 +264,8 @@ and open the template in the editor.
                $('#resultCol'+counterCol).html(html);
             }
             
-            function addMultipleChoices(){                
+            function addMultipleChoices(){  
+                counterQuestion=counterQuestion+1;
                 counterMulti=counterMulti+1;
                 //counterRadio=counterRadio+1;
                 $('#area').append("<div id=\"multiple"+ counterMulti +"\" class=\"panel panel-default\">\
@@ -347,6 +347,7 @@ and open the template in the editor.
             }
             
             function addParagraph(){
+                counterQuestion=counterQuestion+1;
                 counterPara=counterPara+1;
                 $('#area').append("<div id=\"paragraph"+ counterPara +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
@@ -418,10 +419,19 @@ and open the template in the editor.
             function saveForm(){
                 $.get("updateDBServlet",
                 "campaignInput="+$('#campaignName').val()+
+                "&startDateInput="+$('#startDate').val()+
+                "&endDateInput="+$('#endDate').val()+
                 "&questionnaireInput="+$('#questionTitle').val()+
-                "&questionnaireDescInput="+$('#questionDescription').val()+"",function(data){
+                "&questionnaireDescInput="+$('#questionDescription').val()+
+                "&sectionCounterInput="+counterSect+
+                "&sectionHeaderTitle="+$('#headerText'+counterSect).val()+
+                "&sectionHeaderText="+$('#headerDesc'+counterSect).val()+
+                "&questionCounter="+counterQuestion+
+                "&textCounterInput="+counterText+
+                "&questionTextInput="+$('#questionText'+counterText).val()+
+                "&questionDescInput="+$('#textDesc'+counterText).val()+"",function(data){
 			alert(data);
-                });                
+                });
             }
             
             function showDatePicker(){
@@ -557,6 +567,20 @@ and open the template in the editor.
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="left25">
+                                                    <div class="col-lg-3">
+                                                        Start date
+                                                        <input type ="date" id="startDate">                                                        
+                                                      </div>
+                                                    <div class="col-lg-3">
+                                                        End date
+                                                        <input type ="date" id="endDate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="left25">
                                                     <div class="col-lg-11">
                                                         Questionnaire title
                                                         <input type="text" class="form-control" id="questionTitle" placeholder="Enter questionnaire title">
@@ -573,38 +597,7 @@ and open the template in the editor.
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="left25">
-                                                    <div class="col-lg-5">
-                                                        Start date
-                                                        <div class="well">
-                                                            <div id="startDate" class="input-append">
-                                                              <input data-format="yyyy-MM-dd" type="text"></input>
-                                                              <span class="add-on">
-                                                                <i data-time-icon="icon-time" data-date-icon="icon-calendar" onclick='showDatePicker()'>
-                                                                </i>
-                                                              </span>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                      </div>
-                                                    <div class="col-lg-5">
-                                                        End date
-                                                        <div class="input-group date">
-                                                            <input type="text" class="form-control" id="a"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                                                        </div>
-                                                        
-                                                        <script>
-                                                            $('#a').datepicker({
-                                                            });
-                                                        </script>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>   
+                                        </div>                                        
                                     </div>
                                     
                                         

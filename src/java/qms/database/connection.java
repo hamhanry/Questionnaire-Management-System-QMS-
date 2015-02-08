@@ -47,13 +47,20 @@ public class connection {
         }
     }
     
-    public ResultSet execQuery(String query) throws SQLException{
-        st = con.createStatement();
-        return st.executeQuery(query);
+    public ResultSet execQuery(String query){
+        try{    
+            st = con.createStatement();
+            return st.executeQuery(query);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+        return null;
     }
     
     public void execUpdate(String query){
         try {
+            st = con.createStatement();
             st.executeUpdate(query);
         } catch (SQLException ex) {
             System.out.println(ex);

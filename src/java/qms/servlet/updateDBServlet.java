@@ -85,6 +85,7 @@ public class updateDBServlet extends HttpServlet {
          System.out.println("questionTitle : "+questionTitle);
          System.out.println("questionDescription : "+questionDescription);
          System.out.println("sectionNo : "+sectionNo);
+         
          System.out.println("sectionTitle : "+sectionTitle);
          System.out.println("sectionText : "+sectionText);
          System.out.println("questionNo : "+questionNo);

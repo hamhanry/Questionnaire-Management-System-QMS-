@@ -11,8 +11,6 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/datepicker3.css">
-        <script src="assets/js/bootstrap-datetimepicker.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="https://apis.google.com/js/client:platform.js" async defer></script>  
@@ -32,12 +30,27 @@ and open the template in the editor.
             var counterRadio = 1;
             var counterQuestion = 0;
             var pict;
-            var video;
+            //var embedLink="";
             var campaignName;
             
             $(document).ready(function(){
+                $('#campaignArea').focusin(function(){
+                    $('#campaignArea').css("border-color", "RED");                    
+                }); 
                 
-               
+                $('#campaignArea').focusout(function(){
+                    $('#campaignArea').css("border-color", "#ddd");
+                    //$('#sectionHeader'+counterSect).toggle();
+                }); 
+                
+                $('#questionnaireArea').focusin(function(){
+                    $('#questionnaireArea').css("border-color", "RED");                    
+                }); 
+                
+                $('#questionnaireArea').focusout(function(){
+                    $('#questionnaireArea').css("border-color", "#ddd");
+                    //$('#sectionHeader'+counterSect).toggle();
+                });               
             });           
     
             function addSectionHeader(){  
@@ -390,26 +403,75 @@ and open the template in the editor.
             }
             
             function addMedia(){
-                /*$('#area').append("<div class=\"fileinput fileinput-new\" data-provides=\"fileinput\">\
-                                        <div class=\"fileinput-preview thumbnail\" data-trigger=\"fileinput\" style=\"width: 200px; height: 150px;\"></div>\
-                                        <div>\
-                                            <span class=\"btn btn-default btn-file\"><span class=\"fileinput-new\">Select image</span><span class=\"fileinput-exists\">Change</span><input type=\"file\" name=\"...\"></span>\
-                                            <a href=\"#\" class=\"btn btn-default fileinput-exists\" data-dismiss=\"fileinput\">Remove</a>\
+                counterMedia=counterMedia+1;
+                $('#area').append("<div id=\"media"+ counterMedia +"\" class=\"panel panel-default\">\
+                                        <div class=\"panel-body\">\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"spacer20\"></div>\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Picture\
+                                                            <input type=\"file\" id=\"uploadImage"+counterMedia+"\" onchange=\"PreviewImage()\">\
+                                                            <img id=\"uploadPreview\" style=\"width: 100px; height: 100px;\" />\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                            <div class=\"form-group\">\
+                                                <div class=\"row\">\
+                                                    <div class=\"left10\">\
+                                                        <div class=\"col-lg-11\">\
+                                                            Video\
+                                                            <div id=\"divContent\">\
+                                                                <input type=\"text\" class=\"form-control\" id=\"embedLink"+counterMedia+"\" onblur=\"embedVideo()\" placeholder=\"Enter video link\">\
+                                                            </div>\
+                                                            <div id=\"videoArea\"></div>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
                                         </div>\
-                                    </div>");*/
-                $('#area').append("");     
+                                    </div> \
+                                    ");
+        
+                $('#media'+counterMedia).focusin(function(){
+                    $('#media'+counterMedia).css("border-color", "RED");                    
+                }); 
+                
+                $('#media'+counterMedia).focusout(function(){
+                    $('#media'+counterMedia).css("border-color", "#ddd");
+                    //$('#sectionHeader'+counterSect).toggle();
+                });                 
             }
             
-            function embedVideo(){
-            
+            function embedVideo(){                
+                if($('#embedLink'+counterMedia).val()){
+                    $('#videoArea').append("<iframe width=\"420\" height=\"315\"\
+                                                src=\"http://www.youtube.com/embed/"+$('#embedLink'+counterMedia).val()+"\">\
+                                            </iframe>");
+                }else{
+                    $('#videoArea').empty();
+                }
             }
+            
+            function PreviewImage() {
+                if($('#uploadImage'+counterMedia).val()){
+                    var oFReader = new FileReader();
+                    oFReader.readAsDataURL(document.getElementById("uploadImage"+counterMedia).files[0]);
+
+                    oFReader.onload = function (oFREvent) {
+                        document.getElementById("uploadPreview").src = oFREvent.target.result;
+                    };
+                }
+            };
             
             function search(){
             
             }
             
             function createQuestionnaire(){
-            
+                location.reload();
             }
             
             function sendForm(){
@@ -431,12 +493,8 @@ and open the template in the editor.
                 "&questionTextInput="+$('#questionText'+counterText).val()+
                 "&questionDescInput="+$('#textDesc'+counterText).val()+"",function(data){
 			alert(data);
-                });
-            }
-            
-            function showDatePicker(){
-                 $('#startDate').datetimepicker(); 
-                 //$('#endDate').datetimepicker(); 
+                }); 
+                
             }
             
             
@@ -454,15 +512,14 @@ and open the template in the editor.
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"><span class="glyphicon glyphicon-user">hanry</span></a></li>
-                            <li>        
-                                
+                            <li> 
                                 <!--<span class="glyphicon glyphicon-th-large"></span>-->
                                 <div class="spacer5"></div>
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
                                     <span class="glyphicon glyphicon-th-large"></span></button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sign out</a></li>                                    
+                                      <li role="presentation"><a role="menuitem" tabindex="-1" href="index.html">Sign out</a></li>                                    
                                       <li role="presentation" class="divider"></li>
                                       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
                                     </ul>
@@ -482,13 +539,13 @@ and open the template in the editor.
                     </form>
                 </div>
                 <div class="col-lg-1">
-                    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</a>
+                    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-search" onclick="search()"></span> Search</a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create questionnaire</a>
+                    <a class="btn btn-primary"><span class="glyphicon glyphicon-plus" onclick="createQuestionnaire()"></span> Create questionnaire</a>
                 </div>
                 <div class="col-offset-lg-1 col-lg-2">
-                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Send form</a>                  
+                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-ok" onclick="sendForm()"></span> Send form</a>                  
                 </div>                 
                 <!--<div style="width:200px; height:200px; background-color:red" id="abc"></div>-->
             </div>
@@ -552,7 +609,7 @@ and open the template in the editor.
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form" method="POST" action="updateDBServlet">
-                                    <div class="panel panel-default">
+                                    <div class="panel panel-default" id="campaignArea">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="spacer25"></div>
@@ -577,11 +634,14 @@ and open the template in the editor.
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>   
+                                        </div> 
+                                    </div>
+                                    <div class="panel panel-default" id="questionnaireArea">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="left25">
                                                     <div class="col-lg-11">
+                                                        <div class="spacer25"></div>
                                                         Questionnaire title
                                                         <input type="text" class="form-control" id="questionTitle" placeholder="Enter questionnaire title">
                                                     </div>
@@ -597,8 +657,9 @@ and open the template in the editor.
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>   
                                     </div>
+                                    
                                     
                                         
                                     <!--SECTION HEADER-->
@@ -611,7 +672,8 @@ and open the template in the editor.
                                                     <div class="left10">
                                                         <div class="col-lg-11">
                                                             Picture
-                                                            <input type="file" id="pict">
+                                                            <input type="file" id="uploadImage" onchange="PreviewImage()">
+                                                            <img id="uploadPreview" style="width: 100px; height: 100px;" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -621,17 +683,10 @@ and open the template in the editor.
                                                     <div class="left10">
                                                         <div class="col-lg-11">
                                                             Video 
-                                                            <div id="videoArea">
-                                                                    http://www.youtube.com/watch?v=t-ZRX8984sc
-                                                                    <br />
-                                                                    http://vimeo.com/82495711
-                                                                    <br />
-                                                                    http://youtu.be/t-ZRX8984sc
-                                                                </div>
                                                             <div id="divContent">
-                                                                <input type="text" class="form-control" name="video" placeholder="Enter video link">
-                                                                
+                                                                <input type="text" class="form-control" id="embedLink" onblur="embedVideo()" placeholder="Enter video link">
                                                             </div>
+                                                            <div id="videoArea"></div>
                                                         </div>
                                                     </div>
                                                 </div>

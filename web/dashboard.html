@@ -92,20 +92,18 @@ and open the template in the editor.
                                         </div>\
                                     </div> \
                      ");
-                //$('#headerText'+counterSect).focus();   
-                
-                                                
+                //$('#headerText'+counterSect).focus();                   
+                                               
                 $('#sectionHeader'+counterSect).focusin(function(){
                     //$('#sectionHeader'+counterSect).css("box-shadow", "0 1px 1px rgba(0,0,0,.05)");
-                    for(i=1;i<=counterSect;i++){
-                        $('#sectionHeader'+i).css("border-color","RED");
-                        //alert($('#sectionHeader'+i));
-                        //$('#sectionHeader'+counterSect).css({border-style:groove});
-                    }
+                    
+                    $(this).css("border-color","RED");
+                    //$('#sectionHeader'+counterSect).css({border-style:groove});
+                    
                 }); 
                 
                 $('#sectionHeader'+counterSect).focusout(function(){
-                    $('#sectionHeader'+counterSect).css("border-color","#ddd");
+                    $(this).css("border-color","#ddd");
                     sectionHeaderText[counterSect-1] = $('#headerText'+counterSect).val();
                     sectionHeaderDesc[counterSect-1] = $('#headerDesc'+counterSect).val();
                     //$('#sectionHeader'+counterSect).css("background-color", "RED");
@@ -152,11 +150,11 @@ and open the template in the editor.
                 
                                                 
                 $('#text'+counterText).focusin(function(){
-                    $('#text'+counterText).css("border-color","RED");
+                    $(this).css("border-color","RED");
                 }); 
                 
                 $('#text'+counterText).focusout(function(){
-                    $('#text'+counterText).css("border-color","#ddd");
+                    $(this).css("border-color","#ddd");
                     textQuestion[counterSect-1] = $('#questionText'+counterText).val();
                     textDescription[counterSect-1] = $('#textDesc'+counterText).val();
                 }); 
@@ -228,11 +226,11 @@ and open the template in the editor.
                 
                                                 
                 $('#grid'+counterGrid).focusin(function(){
-                    $('#grid'+counterGrid).css("border-color", "RED");                    
+                    $(this).css("border-color", "RED");                    
                 }); 
                 
                 $('#grid'+counterGrid).focusout(function(){
-                    $('#grid'+counterGrid).css("border-color", "#ddd");
+                    $(this).css("border-color", "#ddd");
                     gridQuestion[counterGrid-1] = $('#questionGrid'+counterGrid).val();
                     gridDescription[counterGrid-1] = $('#gridDesc'+counterGrid).val();
                     gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
@@ -351,11 +349,11 @@ and open the template in the editor.
                 
                                                 
                 $('#multiple'+counterMulti).focusin(function(){
-                    $('#multiple'+counterMulti).css("border-color", "RED");                    
+                    $(this).css("border-color", "RED");                    
                 }); 
                 
                 $('#multiple'+counterMulti).focusout(function(){
-                    $('#multiple'+counterMulti).css("border-color", "#ddd");
+                    $(this).css("border-color", "#ddd");
                     multipleQuestion[counterMulti-1] = $('#questionMulti'+counterMulti).val();
                     multipleDescription[counterMulti-1] = $('#multiDesc'+counterMulti).val();
                 }); 
@@ -419,11 +417,11 @@ and open the template in the editor.
                 
                                                 
                 $('#paragraph'+counterPara).focusin(function(){
-                    $('#paragraph'+counterPara).css("border-color", "RED");                    
+                    $(this).css("border-color", "RED");                    
                 }); 
                 
                 $('#paragraph'+counterPara).focusout(function(){
-                    $('#paragraph'+counterPara).css("border-color", "#ddd");
+                    $(this).css("border-color", "#ddd");
                     //$('#sectionHeader'+counterSect).toggle();
                 });                 
             }

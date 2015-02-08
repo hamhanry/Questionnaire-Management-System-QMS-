@@ -30,6 +30,17 @@ and open the template in the editor.
             var counterRadio = 1;
             var counterQuestion = 0;
             var pict;
+            var sectionHeaderText=[];
+            var sectionHeaderDesc=[];
+            var textQuestion=[];
+            var textDescription=[];
+            var gridQuestion=[];
+            var gridRow=[];
+            var gridCol=[];
+            var multipleQuestion=[];
+            var multipleDescription=[];
+            var paragraphQuestion=[];
+            var paragraphDescription=[];            
             //var embedLink="";
             var campaignName;
             
@@ -81,17 +92,22 @@ and open the template in the editor.
                                         </div>\
                                     </div> \
                      ");
-                $('#headerText'+counterSect).focus();   
+                //$('#headerText'+counterSect).focus();   
                 
                                                 
                 $('#sectionHeader'+counterSect).focusin(function(){
                     //$('#sectionHeader'+counterSect).css("box-shadow", "0 1px 1px rgba(0,0,0,.05)");
-                    $('#sectionHeader'+counterSect).css("border-color","RED");
-                    //$('#sectionHeader'+counterSect).css({border-style:groove});
+                    for(i=1;i<=counterSect;i++){
+                        $('#sectionHeader'+i).css("border-color","RED");
+                        //alert($('#sectionHeader'+i));
+                        //$('#sectionHeader'+counterSect).css({border-style:groove});
+                    }
                 }); 
                 
                 $('#sectionHeader'+counterSect).focusout(function(){
                     $('#sectionHeader'+counterSect).css("border-color","#ddd");
+                    sectionHeaderText[counterSect-1] = $('#headerText'+counterSect).val();
+                    sectionHeaderDesc[counterSect-1] = $('#headerDesc'+counterSect).val();
                     //$('#sectionHeader'+counterSect).css("background-color", "RED");
                     //$('#sectionHeader'+counterSect).toggle();
                 }); 
@@ -136,14 +152,13 @@ and open the template in the editor.
                 
                                                 
                 $('#text'+counterText).focusin(function(){
-                    //$('#text'+counterText).css("background-color", "BLUE");
                     $('#text'+counterText).css("border-color","RED");
                 }); 
                 
                 $('#text'+counterText).focusout(function(){
                     $('#text'+counterText).css("border-color","#ddd");
-                    //$('#text'+counterText).css("background-color", "RED");
-                    //$('#sectionHeader'+counterSect).toggle();
+                    textQuestion[counterSect-1] = $('#questionText'+counterText).val();
+                    textDescription[counterSect-1] = $('#textDesc'+counterText).val();
                 }); 
             }
             
@@ -152,8 +167,6 @@ and open the template in the editor.
                 counterGrid=counterGrid+1;
                 counterRow=counterRow+1;
                 counterCol=counterCol+1;
-                /*html = "question"+counterRow;
-                $('#result').html(html);*/
                 
                 $('#area').append("<div id=\"grid"+ counterGrid +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
@@ -220,7 +233,10 @@ and open the template in the editor.
                 
                 $('#grid'+counterGrid).focusout(function(){
                     $('#grid'+counterGrid).css("border-color", "#ddd");
-                    //$('#sectionHeader'+counterSect).toggle();
+                    gridQuestion[counterGrid-1] = $('#questionGrid'+counterGrid).val();
+                    gridDescription[counterGrid-1] = $('#gridDesc'+counterGrid).val();
+                    gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
+                    gridCol[gridCol-1] = $('#gridCol'+gridCol).val();
                 }); 
             }
             
@@ -249,6 +265,10 @@ and open the template in the editor.
                html = "Row "+counterRow;
                $('#resultRow'+counterRow).html(html);
                
+                $('#gridRow'+counterRow).focusout(function(){
+                    gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
+                });    
+                    
             }
             
             function unlockCol(id){                  
@@ -275,6 +295,10 @@ and open the template in the editor.
                
                html = "Col "+counterCol;
                $('#resultCol'+counterCol).html(html);
+               
+               $('#gridCol'+counterCol).focusout(function(){
+                    gridCol[gridCol-1] = $('#gridCol'+counterCol).val();
+                }); 
             }
             
             function addMultipleChoices(){  
@@ -332,10 +356,12 @@ and open the template in the editor.
                 
                 $('#multiple'+counterMulti).focusout(function(){
                     $('#multiple'+counterMulti).css("border-color", "#ddd");
-                    //$('#sectionHeader'+counterSect).toggle();
+                    multipleQuestion[counterMulti-1] = $('#questionMulti'+counterMulti).val();
+                    multipleDescription[counterMulti-1] = $('#multiDesc'+counterMulti).val();
                 }); 
             }
             
+            //HAVENT PUT COUNTER TO PUT IN DB
             function unlockMultiple(id){                  
                 //alert(id);
                 //alert("multiChoice"+counterRadio);
@@ -486,18 +512,15 @@ and open the template in the editor.
                 "&questionnaireInput="+$('#questionTitle').val()+
                 "&questionnaireDescInput="+$('#questionDescription').val()+
                 "&sectionCounterInput="+counterSect+
-                "&sectionHeaderTitle="+$('#headerText'+counterSect).val()+
-                "&sectionHeaderText="+$('#headerDesc'+counterSect).val()+
+                "&sectionHeaderTitle="+sectionHeaderText+
+                "&sectionHeaderText="+sectionHeaderDesc+
                 "&questionCounter="+counterQuestion+
                 "&textCounterInput="+counterText+
                 "&questionTextInput="+$('#questionText'+counterText).val()+
                 "&questionDescInput="+$('#textDesc'+counterText).val()+"",function(data){
 			alert(data);
-                }); 
-                
-            }
-            
-            
+                });   
+            }            
         </script>
         
     </head>

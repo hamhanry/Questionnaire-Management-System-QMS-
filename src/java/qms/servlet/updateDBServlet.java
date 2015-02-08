@@ -68,15 +68,31 @@ public class updateDBServlet extends HttpServlet {
          String questionTitle = request.getParameter("questionnaireInput");
          String questionDescription = request.getParameter("questionnaireDescInput");
          
-         String sectionNo = request.getParameter("sectionCounterInput");
+         int sectionNo =Integer.parseInt(request.getParameter("sectionCounterInput"));         
          String sectionTitle = request.getParameter("sectionHeaderTitle");
+         String [] tmpSectionTitle = sectionTitle.split(",");
          String sectionText = request.getParameter("sectionHeaderText");
+         String [] tmpSectionText = sectionText.split(",");
          
-         String questionCounter = request.getParameter("questionCounter");
+         //For count how many questions in the campaign
+         int questionCounter = Integer.parseInt(request.getParameter("questionCounter"));
          
-         String questionNo = request.getParameter("textCounterInput");
+         int questionNo = Integer.parseInt(request.getParameter("textCounterInput"));
          String questionText = request.getParameter("questionTextInput");
+         String [] tmpQuestionText = questionText.split(",");
          String questionDesc = request.getParameter("questionDescInput");;
+         String [] tmpQuestionDesc = questionDesc.split(",");
+         
+         /*for(int i=0; i<sectionNo; i++){
+             System.out.println("sectionTitle : "+tmpSectionTitle[i]);
+         }*/
+         
+         
+         
+         
+         
+         
+         
          
          //System.out.println(id + ":" + name + ":" + lastname);
          System.out.println("campaign name : "+campaignName);
@@ -84,13 +100,11 @@ public class updateDBServlet extends HttpServlet {
          System.out.println("End date : "+ endDate);
          System.out.println("questionTitle : "+questionTitle);
          System.out.println("questionDescription : "+questionDescription);
-         System.out.println("sectionNo : "+sectionNo);
          
-         System.out.println("sectionTitle : "+sectionTitle);
-         System.out.println("sectionText : "+sectionText);
-         System.out.println("questionNo : "+questionNo);
+         
+         /*System.out.println("questionNo : "+questionNo);
          System.out.println("questionText : "+questionText);
-         System.out.println("questionDesc : "+questionDesc);
+         System.out.println("questionDesc : "+questionDesc);*/
          
          
          connection con = new connection();
@@ -115,20 +129,24 @@ public class updateDBServlet extends HttpServlet {
             //Logger.getLogger(scanData.class.getName()).log(Level.SEVERE, null, ex);
         }    
          
-         //INSERT QUESTIONNAIRE TITLE & DESCRIPTION
-         query="select a.ID from questionnaire a where a.Title='"+questionTitle+"'";
-         try {
-            ResultSet rs = con.execQuery(query);            
-            if(rs.next()){
-                query = "insert into section(QuestionnaireID,Title, Text) values("+Integer.parseInt(rs.getString(1))+",'"+sectionTitle+"','"+sectionText+"')";
-                con.execUpdate(query);
-            }else{
-                out.print("wrong");
-            }
-        } catch (SQLException ex) {
-            //Logger.getLogger(scanData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         //INSERT SECTION TITLE & DESCRIPTION
+        query="select a.ID from questionnaire a where a.Title='"+questionTitle+"'";
+        try {
+           ResultSet rs = con.execQuery(query);            
+           if(rs.next()){
+               for(int i =0; i<sectionNo; i++){
+                    query = "insert into section(QuestionnaireID,Title, Text) values("+Integer.parseInt(rs.getString(1))+",'"+tmpSectionTitle[i]+"','"+tmpSectionText[i]+"')";
+                    con.execUpdate(query);
+               }
+           }else{
+               out.print("wrong");
+           }
+       } catch (SQLException ex) {
+           //Logger.getLogger(scanData.class.getName()).log(Level.SEVERE, null, ex);
+       }
          
+        
+         /*
         //INSERT QUESTION
         query="select a.ID from section a where a.Title='"+questionTitle+"'";
          try {
@@ -143,16 +161,16 @@ public class updateDBServlet extends HttpServlet {
             //Logger.getLogger(scanData.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
-        /*//SHOW QUERY
-         query =  "select * from campaign";
-         ResultSet rs = con.execQuery(query);
-         try {
-            while(rs.next()){
-                System.out.println(rs.getString("id") + " : " + rs.getString("name"));
-            }
-         } catch (SQLException ex) {
-            Logger.getLogger(updateDBServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        //SHOW QUERY
+        // query =  "select * from campaign";
+        // ResultSet rs = con.execQuery(query);
+        // try {
+        //    while(rs.next()){
+        //        System.out.println(rs.getString("id") + " : " + rs.getString("name"));
+        //    }
+        // } catch (SQLException ex) {
+        //    Logger.getLogger(updateDBServlet.class.getName()).log(Level.SEVERE, null, ex);
+        //}*/
          
          con.closeConnect();
          

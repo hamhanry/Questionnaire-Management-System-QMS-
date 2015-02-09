@@ -511,7 +511,8 @@ and open the template in the editor.
             }
             
             function saveForm(){
-                $.get("updateDBServlet",
+                
+                var data = 
                 "campaignInput="+$('#campaignName').val()+
                 "&startDateInput="+$('#startDate').val()+
                 "&endDateInput="+$('#endDate').val()+
@@ -527,7 +528,10 @@ and open the template in the editor.
                 "&questionDescInput="+textDescription+
                 "&paraCounter="+counterPara+
                 "&paragraphQuestionInput="+paragraphQuestion+
-                "&paragraphDescInput="+paragraphDescription+"",function(data){
+                "&paragraphDescInput="+paragraphDescription+"";
+        
+        
+                $.get("updateDBServlet",data,function(data){
 			alert(data);
                 });    
         

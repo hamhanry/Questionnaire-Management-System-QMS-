@@ -29,6 +29,7 @@ and open the template in the editor.
             var counterMedia = 0; 
             var counterRadio = 1;
             var counterQuestion = 0;
+            var questionType = [];
             var pict;
             var sectionHeaderText=[];
             var sectionHeaderDesc=[];
@@ -39,6 +40,7 @@ and open the template in the editor.
             var gridCol=[];
             var multipleQuestion=[];
             var multipleDescription=[];
+            var multiChoice=[];
             var paragraphQuestion=[];
             var paragraphDescription=[];            
             //var embedLink="";
@@ -119,6 +121,7 @@ and open the template in the editor.
             function addText(){
                 counterQuestion=counterQuestion+1;
                 counterText=counterText+1; 
+                questionType[counterQuestion-1]="1";
                 $('#area').append("<div id=\"text"+ counterText +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
@@ -155,8 +158,8 @@ and open the template in the editor.
                 
                 $('#text'+counterText).focusout(function(){
                     $(this).css("border-color","#ddd");
-                    textQuestion[counterSect-1] = $('#questionText'+counterText).val();
-                    textDescription[counterSect-1] = $('#textDesc'+counterText).val();
+                    textQuestion[counterText-1] = $('#questionText'+counterText).val();
+                    textDescription[counterText-1] = $('#textDesc'+counterText).val();
                 }); 
             }
             
@@ -165,6 +168,7 @@ and open the template in the editor.
                 counterGrid=counterGrid+1;
                 counterRow=counterRow+1;
                 counterCol=counterCol+1;
+                questionType[counterQuestion-1]="18";
                 
                 $('#area').append("<div id=\"grid"+ counterGrid +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
@@ -220,7 +224,7 @@ and open the template in the editor.
                                         </div>\
                                     </div>\
                      ");     
-                temp = counterRadio;
+                //temp = counterRadio;
                 
                 $('#grid'+counterGrid).focus();   
                 
@@ -234,7 +238,7 @@ and open the template in the editor.
                     gridQuestion[counterGrid-1] = $('#questionGrid'+counterGrid).val();
                     gridDescription[counterGrid-1] = $('#gridDesc'+counterGrid).val();
                     gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
-                    gridCol[gridCol-1] = $('#gridCol'+gridCol).val();
+                    gridCol[counterCol-1] = $('#gridCol'+counterCol).val();
                 }); 
             }
             
@@ -295,13 +299,14 @@ and open the template in the editor.
                $('#resultCol'+counterCol).html(html);
                
                $('#gridCol'+counterCol).focusout(function(){
-                    gridCol[gridCol-1] = $('#gridCol'+counterCol).val();
-                }); 
+                    gridCol[counterCol-1] = $('#gridCol'+counterCol).val();
+               }); 
             }
             
             function addMultipleChoices(){  
                 counterQuestion=counterQuestion+1;
                 counterMulti=counterMulti+1;
+                questionType[counterQuestion-1]="5";
                 //counterRadio=counterRadio+1;
                 $('#area').append("<div id=\"multiple"+ counterMulti +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
@@ -356,6 +361,7 @@ and open the template in the editor.
                     $(this).css("border-color", "#ddd");
                     multipleQuestion[counterMulti-1] = $('#questionMulti'+counterMulti).val();
                     multipleDescription[counterMulti-1] = $('#multiDesc'+counterMulti).val();
+                    
                 }); 
             }
             
@@ -386,6 +392,7 @@ and open the template in the editor.
             function addParagraph(){
                 counterQuestion=counterQuestion+1;
                 counterPara=counterPara+1;
+                questionType[counterQuestion-1]=12;
                 $('#area').append("<div id=\"paragraph"+ counterPara +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
@@ -422,7 +429,8 @@ and open the template in the editor.
                 
                 $('#paragraph'+counterPara).focusout(function(){
                     $(this).css("border-color", "#ddd");
-                    //$('#sectionHeader'+counterSect).toggle();
+                    paragraphQuestion[counterPara-1] = $('#questionPara'+counterPara).val();
+                    paragraphDescription[counterPara-1] = $('#paraDesc'+counterPara).val();
                 });                 
             }
             
@@ -512,12 +520,17 @@ and open the template in the editor.
                 "&sectionCounterInput="+counterSect+
                 "&sectionHeaderTitle="+sectionHeaderText+
                 "&sectionHeaderText="+sectionHeaderDesc+
+                "&questionTypeInput="+questionType+
                 "&questionCounter="+counterQuestion+
                 "&textCounterInput="+counterText+
-                "&questionTextInput="+$('#questionText'+counterText).val()+
-                "&questionDescInput="+$('#textDesc'+counterText).val()+"",function(data){
+                "&questionTextInput="+textQuestion+
+                "&questionDescInput="+textDescription+
+                "&paraCounter="+counterPara+
+                "&paragraphQuestionInput="+paragraphQuestion+
+                "&paragraphDescInput="+paragraphDescription+"",function(data){
 			alert(data);
-                });   
+                });    
+        
             }            
         </script>
         

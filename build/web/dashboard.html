@@ -36,6 +36,7 @@ and open the template in the editor.
             var textQuestion=[];
             var textDescription=[];
             var gridQuestion=[];
+            var gridDescription=[];
             var gridRow=[];
             var gridCol=[];
             var multipleQuestion=[];
@@ -45,6 +46,14 @@ and open the template in the editor.
             var paragraphDescription=[];            
             //var embedLink="";
             var campaignName;
+            //JSON OBJ
+            var store = {};
+            var campaign = {};
+            var questionnaire = {};
+            var section = {};
+            var question = {};
+            var row = [];
+            var col = [];
             
             $(document).ready(function(){
                 $('#campaignArea').focusin(function(){
@@ -67,7 +76,7 @@ and open the template in the editor.
             });           
     
             function addSectionHeader(){  
-                counterSect=counterSect+1;                
+                counterSect=counterSect+1;   
                 $('#area').append("<div id=\"sectionHeader"+ counterSect +"\" class=\"panel panel-default\">\
                                         <div class=\"panel-body\">\
                                             <div class=\"form-group\">\
@@ -98,16 +107,17 @@ and open the template in the editor.
                                                
                 $('#sectionHeader'+counterSect).focusin(function(){
                     //$('#sectionHeader'+counterSect).css("box-shadow", "0 1px 1px rgba(0,0,0,.05)");
-                    
                     $(this).css("border-color","RED");
                     //$('#sectionHeader'+counterSect).css({border-style:groove});
-                    
                 }); 
                 
                 $('#sectionHeader'+counterSect).focusout(function(){
                     $(this).css("border-color","#ddd");
-                    sectionHeaderText[counterSect-1] = $('#headerText'+counterSect).val();
-                    sectionHeaderDesc[counterSect-1] = $('#headerDesc'+counterSect).val();
+                    //sectionHeaderText[counterSect-1] = $('#headerText'+counterSect).val();
+                    //sectionHeaderDesc[counterSect-1] = $('#headerDesc'+counterSect).val();
+                    //JSON
+                    section[counterSect] = {"title" : $('#headerText'+counterSect).val(), "text" : $('#headerDesc'+counterSect).val()};
+                    console.log(section);
                     //$('#sectionHeader'+counterSect).css("background-color", "RED");
                     //$('#sectionHeader'+counterSect).toggle();
                 }); 
@@ -158,8 +168,11 @@ and open the template in the editor.
                 
                 $('#text'+counterText).focusout(function(){
                     $(this).css("border-color","#ddd");
-                    textQuestion[counterText-1] = $('#questionText'+counterText).val();
-                    textDescription[counterText-1] = $('#textDesc'+counterText).val();
+                    //textQuestion[counterText-1] = $('#questionText'+counterText).val();
+                    //textDescription[counterText-1] = $('#textDesc'+counterText).val();
+                    //CREATE 3 DIMENSION IF WANNA HANDLE ANSWERS
+                    question[counterQuestion]= {"text" : $('#questionText'+counterText).val(), "answers" : "1"};
+                    console.log(question);
                 }); 
             }
             
@@ -235,10 +248,15 @@ and open the template in the editor.
                 
                 $('#grid'+counterGrid).focusout(function(){
                     $(this).css("border-color", "#ddd");
-                    gridQuestion[counterGrid-1] = $('#questionGrid'+counterGrid).val();
-                    gridDescription[counterGrid-1] = $('#gridDesc'+counterGrid).val();
-                    gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
-                    gridCol[counterCol-1] = $('#gridCol'+counterCol).val();
+                    //gridQuestion[counterGrid-1] = $('#questionGrid'+counterGrid).val();
+                    //gridDescription[counterGrid-1] = $('#gridDesc'+counterGrid).val();
+                    //gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
+                    //gridCol[counterCol-1] = $('#gridCol'+counterCol).val();
+                    //JSON
+                    row[counterRow] = $('#gridRow'+counterRow).val();
+                    col[counterCol] = $('#gridCol'+counterCol).val();
+                    question[counterQuestion] = {"text" : $('#questionGrid'+counterGrid).val(), "answersRow" : row, "answersCol" : col};
+                    console.log(question);
                 }); 
             }
             
@@ -262,14 +280,18 @@ and open the template in the editor.
                                                 </div>\
                                             </div>\
                                                 ");
+                        html = "Row "+counterRow;
+                        $('#resultRow'+counterRow).html(html);
+
+                        $('#gridRow'+counterRow).focusout(function(){
+                             gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
+                             row[counterRow] = $('#gridRow'+counterRow).val();
+                             question[counterQuestion]["answersRow"] = row;
+                             console.log(question);
+                });  
                }
                
-               html = "Row "+counterRow;
-               $('#resultRow'+counterRow).html(html);
-               
-                $('#gridRow'+counterRow).focusout(function(){
-                    gridRow[counterRow-1] = $('#gridRow'+counterRow).val();
-                });    
+                 
                     
             }
             
@@ -300,6 +322,9 @@ and open the template in the editor.
                
                $('#gridCol'+counterCol).focusout(function(){
                     gridCol[counterCol-1] = $('#gridCol'+counterCol).val();
+                    col[counterCol] = $('#gridRow'+counterCol).val();
+                    question[counterQuestion]["answersCol"] = col;
+                    console.log(question);
                }); 
             }
             
